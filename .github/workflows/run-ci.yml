@@ -23,7 +23,7 @@ jobs:
           sudo npm install -g @neuralegion/nexploit-cli
       - name: Save environment variables
         run: |
-          printf "NEXPLOIT_TOKEN=${{ secrets.NEXPLOIT_TOKEN }}\nREPEATER=${{ secrets.REPEATER }}\n" > .env
+          printf "NEXTPLOIT_TOKEN=${{ secrets.NEXTPLOIT_TOKEN }}\nREPEATER=${{ secrets.REPEATER }}\n" > .env
           cat .env
       - name: Docker-Compose
         run: |
@@ -38,7 +38,7 @@ jobs:
             --name "🥤 Juice-Shop for a '${GITHUB_REF##*/}' branch #${GITHUB_RUN_NUMBER}" \
             --crawler http://juiceshop.local:3000                                         \
             --repeater ${{ secrets.REPEATER }}                                            \
-            --token ${{ secrets.NEXPLOIT_TOKEN }})
+            --token ${{ secrets.NEXTPLOIT_TOKEN }})
           echo "SCAN_ID=$SCAN_ID" >> $GITHUB_ENV
       - name: Get the output scan url 🔗
         run: |
@@ -48,9 +48,9 @@ jobs:
           nexploit-cli scan:polling               \
             --interval 30s                        \
             --timeout 20m                         \
-            --token ${{ secrets.NEXPLOIT_TOKEN }} \
+            --token ${{ secrets.NEXTPLOIT_TOKEN }} \
             --breakpoint medium_issue $SCAN_ID
       - name: Stop Scan 🛑
         continue-on-error: true
         if: ${{ always() }}
-        run: nexploit-cli scan:stop --token ${{ secrets.NEXPLOIT_TOKEN }} $SCAN_ID
+        run: nexploit-cli scan:stop --token ${{ secrets.NEXTPLOIT_TOKEN }} $SCAN_ID
